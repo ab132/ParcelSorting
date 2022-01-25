@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace ParcelSorting
 {
@@ -9,15 +8,31 @@ namespace ParcelSorting
         {
             bool ok = false;
 
-            if (Math.Sqrt(Math.Pow((l / 2f), 2) + Math.Pow(b, 2)) < widths.Min(w => w))
+            if (b > widths[0])
             {
-                ok = true;
-                Console.WriteLine("fits = {0}", ok);
-
-                return ok;
+                b = l;
+                l = b;
             }
-            
-            Console.WriteLine("fits = {0}", ok);
+
+            for (int i = 0; i < widths.Length - 1; i++)
+            {
+                {
+                    if ((Math.Sqrt(Math.Pow(widths[i], 2) - Math.Pow(b, 2)) + Math.Sqrt(Math.Pow(widths[i + 1], 2) - Math.Pow(b, 2))) >= l)
+                    {
+                        ok = true;
+                    }
+                }
+            }
+
+            if (ok)
+            {
+                Console.WriteLine("fits = {0}", ok);
+            }
+            else
+            {
+                Console.WriteLine("fits = {0}", ok);
+            }
+
             return ok;
         }
     }
